@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>プロフィール編集画面</title>
+<link rel="stylesheet"  th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<div class="container">
+		<form th:action="@{/edit-complete}" method="post" th:object="${userProfileForm}" class="container">
+		    【性別】<br>
+		    <input type="radio" th:field="*{gender}" th:value="male">男性
+		    <input type="radio" th:field="*{gender}" th:value="female">女性
+			<div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="error-msg"></div>
+		    <br>
+			【年齢】<br>
+			<input type="number" th:field="*{age}"><br>
+			<div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="error-msg"></div>
+		    【身長】<br>
+		    <input type="number" th:field="*{height}"><br>
+			<div th:if="${#fields.hasErrors('height')}" th:errors="*{height}" class="error-msg"></div>
+		    【体重】<br>
+		    <input type="number" th:field="*{weight}"><br>
+			<div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" class="error-msg"></div>
+		    【日常の活動量】<br>
+			<select name="activity" th:field="*{activity}">
+				<option value="1">ほとんど運動しない</option>
+				<option value="2">軽い運動(週1~3日)</option>
+				<option value="3">中程度の運動(週3~5日)</option>
+				<option value="4">激しい運動(週6~7日)</option>
+				<option value="5">非常に激しい運動(体を動かす職業)</option>
+			</select>		
+			<div th:if="${#fields.hasErrors('activity')}" th:errors="*{activity}" class="error-msg"></div>
+		    <input type="submit" value="変更する">
+		</form>
+		
+		<a th:href="@{/}">マイページへ</a>
+	</div>
+	
+</body>
+</html>

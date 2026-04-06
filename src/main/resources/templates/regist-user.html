@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>登録画面</title>
+</head>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<body>
+
+	<div class="container">
+		<h2>登録画面</h2>
+		<br>
+		
+		<form th:action="@{/regist-form}" method="post" th:object="${userRegistForm}">
+			ユーザ名<br>
+			<input type="text" name="username"><br>
+			<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-msg"></p>
+			パスワード<br>
+			<input type="text" name="password"><br>
+			<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-msg"></p>
+			<input type="submit" value="登録" class="btn">		
+		</form>
+		<br>
+		
+		<a th:href="@{/login}">ログインページへ</a>
+	</div>
+	
+	
+</body>
+</html>

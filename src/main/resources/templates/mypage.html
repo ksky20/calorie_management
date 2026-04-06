@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>マイページ</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	
+	<div id="logout">
+		ユーザ名: <span sec:authentication="principal.username"></span>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="ログアウト">			
+		</form>
+	</div>
+	
+	<div class="container">
+		<h1>カロリー管理アプリ</h1>
+		
+	<!--	プロフィール登録-->
+		<div th:if="${profile == null}">
+			<form th:action="@{/regist-profile}" method="post" th:object="${userProfileForm}">
+				【性別】<br>
+				<input type="radio" value="male" th:field="*{gender}">男性
+				<input type="radio" value="female" th:field="*{gender}">女性
+				<div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="error-msg"></div>
+				<br>
+				【年齢】<br>
+				<input type="number" th:field="*{age}">
+				<div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="error-msg"></div>
+				<br>
+				【身長】<br>
+				<input type="number" th:field="*{height}">
+				<div th:if="${#fields.hasErrors('height')}" th:errors="*{height}" class="error-msg"></div>
+				<br>
+				【体重】<br>
+				<input type="number"th:field="*{weight}">
+				<div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" class="error-msg"></div>
+				<br>
+				【日常の活動量】<br>
+				<select th:field="*{activity}">
+					<option value="1">ほとんど運動しない</option>
+					<option value="2">軽い運動(週1~3日)</option>
+					<option value="3">中程度の運動(週3~5日)</option>
+					<option value="4">激しい運動(週6~7日)</option>
+					<option value="5">非常に激しい運動(体を動かす職業)</option>
+				</select>
+				<div th:if="${#fields.hasErrors('activity')}" th:errors="*{activity}" class="error-msg"></div><br>
+				<input type="submit" value="登録する">
+			</form>
+		</div>
+		
+	<!--	登録情報表示-->
+		<div th:if="${profile != null}" id="profile">
+			<h3>プロフィール情報</h3><br>
+			<p>【年齢】<span th:text="${profile.age}"></span>歳</p><br>
+			<p>【性別】
+				<span th:if="${profile.gender == 'male'}">男性</span>
+				<span th:if="${profile.gender == 'female'}">女性</span>
+			</p><br>
+			<p>【身長】<span th:text="${profile.height}"></span>cm</p><br>
+			<p>【体重】<span th:text="${profile.weight}"></span>kg</p><br>
+			<p>【日常の活動度合】
+				<span th:if="${profile.activity == 1}">ほとんど運動しない</span>
+				<span th:if="${profile.activity == 2}">軽い運動(週1~3日)</span>
+				<span th:if="${profile.activity == 3}">中程度の運動(週3~5日)</span>
+				<span th:if="${profile.activity == 4}">激しい運動(週6~7日)</span>
+				<span th:if="${profile.activity == 5}">非常に激しい運動(体を動かす職業)</span>
+			</p><br>
+			
+			<!--	プロフィール編集画面へ-->
+			<form th:action="@{edit-profile}" method="post" th:object="${profile}">
+				<input type="hidden" th:field="*{age}">
+				<input type="hidden" th:field="*{gender}">
+				<input type="hidden" th:field="*{height}">
+				<input type="hidden" th:field="*{weight}">
+				<input type="hidden" th:field="*{activity}">
+						
+				<input type="submit" value="プロフィールを変更する">
+			</form>
+		</div>
+			
+	<!--	食べたもの入力-->
+		<div th:if="${profile != null}" th:object="${profile}">
+			<h2>今日の食べたものの記録</h2><br>
+			<p id="ideal-calories">一日の理想のカロリー: <span th:text="*{ideal_calories}"></span>kcal</p><br>
+			<p>合計カロリー: <span th:text="${totalCalories}"></span>kcal</p><br>
+		</div>
+			
+		<div th:if="${profile != null}">
+			<form th:action="@{/regist-food}" method="post" th:object="${registFoodForm}">
+				<table>
+					<tr>
+						<td>【食べたもの】</td>
+						<td><input type="text" name="food_name"></td>
+					</tr>
+					<tr>
+						<td>【摂取カロリー】</td>
+						<td><input type="number" name="food_calories"></td>
+					</tr>
+				</table>
+				<div th:if="${#fields.hasErrors('food_name')}" th:errors="*{food_name}" class="error-msg"></div>
+				<div th:if="${#fields.hasErrors('food_calories')}" th:errors="*{food_calories}" class="error-msg"></div>
+				<input type="submit" value="追加">
+			</form>
+			
+			<!--	食べたもの表示-->
+			<table>
+				<tr>
+					<th>食べたもの</th>
+					<th>摂取カロリー</th>
+				</tr>
+				<tr th:each="food : ${foods_list}">
+				    <td th:text="${food.food_name}"></td>
+				    <td th:text="${food.food_calories}"></td>
+				</tr>
+			</table>		
+		</div>
+	</div>		
+	
+	<!-- 日付検索フォーム -->
+	<div th:if="${profile != null}" class="container">
+		過去の一日の食べたものをみる<br>
+		<form th:action="@{/search-food}" method="post" th:object="${pastDateForm}">
+		    <input type="date" name="date" th:field="*{date}">
+			<div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="error-msg"></div>
+		    <input type="submit" value="検索">
+		</form>
+		
+		<!-- 検索結果の表示 -->
+		<div th:if="${searchFoodsList != null}">
+			<p th:text="${date}"></p>
+			<table>
+			    <tr>
+			        <th>食べたもの</th>
+			        <th>カロリー</th>
+			    </tr>
+			    <tr th:each="food : ${searchFoodsList}">
+			        <td th:text="${food['food_name']}"></td>
+			        <td th:text="${food['food_calories']}"></td>
+			    </tr>
+			</table>
+			<p th:if="${searchTotalCalories != null}">
+			    合計カロリー: <span th:text="${searchTotalCalories}"></span>kcal
+			</p>
+		</div>
+	</div>
+	
+	
+	
+</body>
+</html>

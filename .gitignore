@@ -1,0 +1,24 @@
+src/main/resources/application.properties 
+/target/
+
+# Spring Boot 設定ファイル
+src/main/resources/application-dev.properties
+src/main/resources/application-prod.properties
+src/main/resources/application*.yml
+
+# ビルド成果物
+*.class
+*.jar
+*.war
+
+# Eclipse設定ファイル
+.classpath
+.project
+.settings/
+
+# ログファイル
+*.log
+logs/
+
+# 環境変数ファイル
+.env
