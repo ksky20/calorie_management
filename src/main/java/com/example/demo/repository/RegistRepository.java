@@ -13,4 +13,6 @@ public interface RegistRepository {
 	void addFood(Food food);
 	
 	void editProfile(Profile profile);
+	
+	void editFood(Food food);
 }

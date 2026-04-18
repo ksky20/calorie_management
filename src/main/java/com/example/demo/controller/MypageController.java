@@ -88,6 +88,10 @@ public class MypageController {
 		
 		int userId = principal.getId();	
 	    LocalDate today = LocalDate.now();
+	    
+
+		System.out.println("controller : " + userId);
+		System.out.println("controller : " + today);
 		
 //	    Validationエラー時
 		if(result.hasErrors()) {
@@ -116,7 +120,8 @@ public class MypageController {
 		food.setFood_name(form.getFood_name());
 		food.setFood_calories(form.getFood_calories());
 		food.setUser_id(userId);
-		
+				
+		System.out.println("food : " + food);		
 //		食べたものの登録
 		registService.registFood(food);
 						

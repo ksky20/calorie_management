@@ -13,4 +13,6 @@ public interface RegistService {
 	void registFood(Food food);
 	
 	void editProfile(Profile profile);
+	
+	void editFood(Food food);
 }

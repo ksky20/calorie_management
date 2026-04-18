@@ -15,11 +15,11 @@ public class FoodRepositoryImpl implements FoodRepository {
 
 	private final JdbcTemplate jdbcTemplate;
 	
-//	今日食べたもの一覧表示
+//	食べたもの一覧表示
 	@Override
 	public List<Map<String, Object>> selectByUser_idAndDate(int user_id, LocalDate date) {
 		
-		String sql = "SELECT food_name, food_calories " + 
+		String sql = "SELECT id, food_name, food_calories " + 
 						 	"FROM foods_list " + 
 						 	"WHERE user_id = ? " + 
 						 	"AND food_date = ?";
@@ -28,6 +28,7 @@ public class FoodRepositoryImpl implements FoodRepository {
 		
 	}
 
+//	総摂取カロリー
 	@Override
 	public int getTotalCalories(int user_id, LocalDate date) {
 		

@@ -20,13 +20,13 @@ public class UserProfileForm {
 	private Integer age;
 	
 	@NotNull(message="入力してください")
-	@Min(value=0, message="年齢を入力してください")
-	@Max(value=300, message="年齢を入力してください")
+	@Min(value=1, message="	1以上の値を入力してください")
+	@Max(value=300, message="300以下の値を入力してください")
 	private BigDecimal height;
 	
 	@NotNull(message="入力してください")
-	@Min(value=0, message="年齢を入力してください")
-	@Max(value=300, message="年齢を入力してください")
+	@Min(value=1, message="1以上の値を入力してください")
+	@Max(value=300, message="300以下の値を入力してください")
 	private BigDecimal weight;
 	
 	@NotNull(message="選択してください")

@@ -123,30 +123,10 @@
 		過去の一日の食べたものをみる<br>
 		<form th:action="@{/search-food}" method="post" th:object="${pastDateForm}">
 		    <input type="date" name="date" th:field="*{date}">
-			<div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="error-msg"></div>
+			<div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="error-msg"></div><br>
 		    <input type="submit" value="検索">
 		</form>
-		
-		<!-- 検索結果の表示 -->
-		<div th:if="${searchFoodsList != null}">
-			<p th:text="${date}"></p>
-			<table>
-			    <tr>
-			        <th>食べたもの</th>
-			        <th>カロリー</th>
-			    </tr>
-			    <tr th:each="food : ${searchFoodsList}">
-			        <td th:text="${food['food_name']}"></td>
-			        <td th:text="${food['food_calories']}"></td>
-			    </tr>
-			</table>
-			<p th:if="${searchTotalCalories != null}">
-			    合計カロリー: <span th:text="${searchTotalCalories}"></span>kcal
-			</p>
-		</div>
 	</div>
-	
-	
 	
 </body>
 </html>

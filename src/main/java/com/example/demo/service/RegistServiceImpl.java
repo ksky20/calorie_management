@@ -104,4 +104,10 @@ public class RegistServiceImpl implements RegistService {
 		repository.editProfile(profile);
 	}
 
+	@Override
+	public void editFood(Food food) {
+		
+		repository.editFood(food);
+	}
+
 }

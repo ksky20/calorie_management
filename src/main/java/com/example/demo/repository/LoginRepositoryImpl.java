@@ -20,7 +20,7 @@ public class LoginRepositoryImpl implements LoginRepository {
 	@Override
 	public Profile findByUserId(int userId) {
 		
-		String sql = "SELECT * FROM profile WHERE userId = ?";
+		String sql = "SELECT * FROM profile WHERE user_id = ?";
 
 		List<Map<String, Object>> results = jdbcTemplate.queryForList(sql, userId);
 		
@@ -37,7 +37,7 @@ public class LoginRepositoryImpl implements LoginRepository {
 		profile.setWeight((BigDecimal)map.get("weight"));
 		profile.setActivity(Integer.parseInt(map.get("activity").toString()));
 		profile.setIdeal_calories(Integer.parseInt(map.get("ideal_calories").toString()));
-		profile.setUserId(Integer.parseInt(map.get("userId").toString()));
+		profile.setUserId(Integer.parseInt(map.get("user_id").toString()));
 				
 		return profile;
 	}

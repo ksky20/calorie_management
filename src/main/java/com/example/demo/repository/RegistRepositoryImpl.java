@@ -32,7 +32,7 @@ public class RegistRepositoryImpl implements RegistRepository {
 	public void addProfile(Profile profile) {
 		
 		String sql = 	"INSERT INTO profile " + 
-							"(userId, gender, height, weight, age, activity, ideal_calories) " + 
+							"(user_id, gender, height, weight, age, activity, ideal_calories) " + 
 							"VALUES(?, ?, ? ,?, ?, ?, ?)";
 		
 		jdbcTemplate.update(sql, profile.getUserId(), profile.getGender(), profile.getHeight(), profile.getWeight(), 
@@ -42,6 +42,8 @@ public class RegistRepositoryImpl implements RegistRepository {
 //	食べたものとカロリーの追加
 	@Override
 	public void addFood(Food food) {
+		
+		System.out.println("repository : " + food.getUser_id());
 		
 		String sql = 	"INSERT INTO foods_list " + 
 							"(user_id, food_date, food_name, food_calories) " + 
@@ -56,7 +58,7 @@ public class RegistRepositoryImpl implements RegistRepository {
 		
 		String sql =  "UPDATE profile " +
 		                   "SET gender = ?, height = ?, weight = ?, age = ?, activity = ? " +
-		                   "WHERE userId = ?";
+		                   "WHERE user_id = ?";
 
 		    jdbcTemplate.update(sql,  profile.getGender(),
 		    									   profile.getHeight(),
@@ -64,6 +66,19 @@ public class RegistRepositoryImpl implements RegistRepository {
 		    									   profile.getAge(),
 		    									   profile.getActivity(),
 		    									   profile.getUserId());
+	}
+
+	@Override
+	public void editFood(Food food) {
+		
+		String sql = "UPDATE foods_list " +
+						  "SET food_date = ?, food_name = ?, food_calories = ? " +
+						  "WHERE id = ?";
+		
+		jdbcTemplate.update(sql, food.getFood_date(),
+											  food.getFood_name(),
+											  food.getFood_calories(),
+											  food.getId());
 	}
 	
 	
