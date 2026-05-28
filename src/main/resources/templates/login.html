@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログイン画面</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<div class="container">
+		<h2>カロリー管理アプリ</h2>
+		<br>
+	
+		<p>ログイン</p>
+		<form th:action="@{/login}" method="post">
+			<table>
+				<tr>
+					<td>【ユーザID】</td>
+					<td><input type="text" name="username"  required></td>
+				</tr>
+				<tr>
+					<td>【パスワード】</td>
+					<td><input type="password" name="password" required></td>
+				</tr>
+			</table>
+					
+			<input type="submit" value="ログイン" class="btn">
+		</form>
+	</div>
+	
+	<br>
+	
+	<div class="container">
+		<p>未登録の場合</p>
+		<a th:href="@{/regist}">登録画面へ</a>
+	</div>
+	
+</body>
+</html>

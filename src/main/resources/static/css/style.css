@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+body{
+	font-family: "メイリオ", "Hiragino Kaku Gothic ProN", sans-serif;
+	background-color: ghostwhite;
+	padding: 20px;
+}           
+
+.container{
+	max-width: 500px;
+	text-align: center;
+	line-height: 1.5;
+	margin: 0 auto;
+	background: white;
+	padding: 30px;
+	border-radius: 15px;
+}            
+
+h1, h2{
+    font-weight: bold;
+    text-align: center;
+    background-color: yellowgreen;
+    color: white;
+}
+
+h1{ 
+	font-size: 30px; 
+	margin: 5px auto; 
+}
+
+h2{ 
+	font-size: 28px; 
+	padding: 6px 0; 
+}
+
+table{
+	border: 1px solid #5e696c;
+	margin: 0 auto;
+	width: 80%;
+	border-collapse:  collapse;
+	text-align: center;
+}
+
+#profile{
+	line-height: 1.5px;
+}
+
+#ideal-calories{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/*ログアウト*/
+#logout{
+	text-align: right;
+	margin: 0;
+}
+
+/*エラー関連*/
+.error-msg{
+	font-weight: bold;
+	color: red;
+}
+

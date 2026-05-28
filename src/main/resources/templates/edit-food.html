@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>食べたもの編集画面</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<div class="container">
+		<form th:action="@{/edit-food-complete}" method="post" th:object="${registFoodForm}">
+			
+			<input type="hidden" th:field="*{id}">
+			【日付】<br>
+			<input type="date" th:field="*{food_date}"><br>
+			<div th:if="${#fields.hasErrors('food_date')}" th:errors="*{food_date}" class="error-msg"></div>
+			【食べたもの】<br>
+			<input type="text" th:field="*{food_name}"><br>
+			<div th:if="${#fields.hasErrors('food_name')}" th:errors="*{food_name}" class="error-msg"></div>
+			【摂取カロリー】<br>
+			<input type="number" th:field="*{food_calories}"><br>
+			<div th:if="${#fields.hasErrors('food_calories')}" th:errors="*{food_calories}" class="error-msg"></div>
+			
+			<input type="submit" value="変更する"><br>
+						
+		</form>
+		
+		<form th:action="@{/search-food-rev}" method="post" th:object="${registFoodForm}">
+			<input type="hidden" th:field="*{id}">
+			<input type="hidden" th:field="*{food_date}">
+			<input type="hidden" th:field="*{food_name}">
+			<input type="hidden" th:field="*{food_calories}">
+			
+			<input type="submit" value="戻る">
+		</form>
+		
+	</div>
+	
+</body>
+</html>

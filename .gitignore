@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
@@ -37,3 +38,29 @@ application.properties
 
 ### VS Code ###
 .vscode/
+=======
+src/main/resources/application.properties 
+/target/
+
+# Spring Boot 設定ファイル
+src/main/resources/application-dev.properties
+src/main/resources/application-prod.properties
+src/main/resources/application*.yml
+
+# ビルド成果物
+*.class
+*.jar
+*.war
+
+# Eclipse設定ファイル
+.classpath
+.project
+.settings/
+
+# ログファイル
+*.log
+logs/
+
+# 環境変数ファイル
+.env
+>>>>>>> 0bae5371f6064231da4ad0f4ef586f3eb3abaf86

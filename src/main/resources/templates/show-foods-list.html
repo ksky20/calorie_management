@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>食べたもの編集画面</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<!-- 検索結果の表示 -->
+	<div class="container">
+		<p th:text="${date}"></p>
+		<table>
+		    <tr>
+				<th></th>
+				<th></th>
+		        <th>食べたもの</th>
+		        <th>カロリー</th>
+		    </tr>
+		    <tr th:each="food : ${searchFoodsList}">
+				<td>
+					<form th:action="@{/edit-foods-list}" method="post">
+						<input type="hidden" name="id" th:value="${food['id']}">
+						<input type="hidden" name="food_date" th:value="${date}">
+						<input type="hidden" name="food_name" th:value="${food['food_name']}">
+						<input type="hidden" name="food_calories" th:value="${food['food_calories']}">
+						<input type="submit" value="編集" >
+					</form>
+				</td>
+				<td>
+					<form th:action="@{/remove-foods-list}" method="post">
+						<input type="hidden" name="id" th:value="${food['id']}">
+						<input type="hidden" name="food_date" th:value="${date}">
+						<input type="hidden" name="food_name" th:value="${food['food_name']}">
+						<input type="hidden" name="food_calories" th:value="${food['food_calories']}">
+						<input type="submit" value="削除" >
+					</form>		
+				</td>			
+		        <td th:text="${food['food_name']}"></td>
+		        <td th:text="${food['food_calories']}"></td>
+		    </tr>
+		</table>
+				
+		<p th:if="${searchTotalCalories != null}">
+		    合計カロリー: <span th:text="${searchTotalCalories}"></span>kcal
+		</p>
+		
+		<a th:href="@{/}">マイページへ</a>
+	</div>
+	
+</body>
+</html>

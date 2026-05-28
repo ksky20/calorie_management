@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>削除確認画面</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<div th:object="${registFoodForm}" class="container">
+		<p>【日付】</p>
+		<p th:text="${registFoodForm.food_date}"></p>
+		<p>【食べたもの】</p>
+		<p th:text="${registFoodForm.food_name}"></p>
+		<p>【摂取カロリー】</p>
+		<p th:text="${registFoodForm.food_calories}"></p>
+		
+		<form th:action="@{/remove-foods-complete}" method="post">
+			<input type="hidden" th:field="*{id}">
+			<input type="hidden" th:field="*{food_date}">
+			<input type="hidden" th:field="*{food_name}">
+			<input type="hidden" th:field="*{food_calories}">
+			
+			<input type="submit" value="削除する">
+		</form>
+		<form th:action="@{/search-food-rev}" method="post">
+		    <input type="hidden" th:field="*{id}">
+		    <input type="hidden" th:field="*{food_date}">
+		    <input type="hidden" th:field="*{food_name}">
+		    <input type="hidden" th:field="*{food_calories}">
+			
+		    <input type="submit" value="戻る">
+		</form>
+	</div>
+	
+</body>
+</html>
