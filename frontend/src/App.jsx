@@ -4,6 +4,7 @@ import { RegistUser } from "./components/RegistUser";
 import { UserProfile } from "./components/UserProfile";
 import { EditProfile } from "./components/EditProfile";
 import { Mypage } from "./components/Mypage";
+import { PastFoodList } from "./components/PastFoodList";
 
 export function App() {
   return (
@@ -15,6 +16,7 @@ export function App() {
         <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/edit-profile" element={<EditProfile />}/>
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/past-list" element={<PastFoodList />}/>
       </Routes>
     </BrowserRouter>
   );

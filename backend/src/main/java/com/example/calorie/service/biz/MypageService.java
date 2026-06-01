@@ -15,8 +15,14 @@ public interface MypageService {
 	UserProfileResponse findProfileById(Long userId);
 
 	//foodListの一覧取得
-	List<FoodListResponse> findAll(Long userId, LocalDate today);
+	List<FoodListResponse> findByUserIdAndDate(Long userId, LocalDate today);
+
+	//1日の総摂取カロリー取得
+	int getTotalCalorie(Long userId, LocalDate date);
 
 	//foodListから削除
 	void deleteFood(Long id);
+
+	//日付検索
+//	List<FoodListResponse> getFoodListByDate(Long userId, LocalDate date);
 }

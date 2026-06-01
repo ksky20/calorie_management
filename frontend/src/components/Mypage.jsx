@@ -14,6 +14,11 @@ export function Mypage() {
     activity: "",
     idealCalories: "",
   });
+  const [totalCalorie, setTotalCalorie] = useState("");
+  const [userInfo, setUserInfo] = useState({
+    id: "",
+    username: "",
+  });
   const navigate = useNavigate();
 
   //ログアウト
@@ -27,12 +32,21 @@ export function Mypage() {
   //画面表示
   useEffect (() => {
 
+    //user情報取得
+    const fetchUser = async () => {
+      const res = await api("/user-info", "GET");
+      const data = await res.json();
+      console.log("userInfo:" + data.id);
+      console.log(JSON.stringify(data));
+      setUserInfo(data);
+    }
+
     //foodList表示
     const fetchFoodList = async () => {
       const res = await api("/show-food-list", "GET");
       const data = await res.json();
-      console.log(Array.isArray(data)); 
-      console.log(data);
+      // console.log(Array.isArray(data)); 
+      // console.log(data);
       setFoodList(data);
     };
 
@@ -40,13 +54,24 @@ export function Mypage() {
     const fetchProfile = async () => {
       const res = await api("/show-user-profile", "GET");
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       setUserProfile(data);
     };
 
+    //totalCalorie表示
+    const fetchTotalCalorie = async () => {
+      const res = await api(`/show-total-calorie/${userInfo.id}`, "GET");
+      const data = await res.json();
+      console.log("totalcalorie:" + data);
+      setTotalCalorie(data);
+    }
+
+    fetchUser();
     fetchFoodList();
-    fetchProfile();
-  },[]);
+    fetchProfile(); 
+    if (!userInfo.id) return;
+    fetchTotalCalorie();
+  },[userInfo.id]);
 
   //食べたものとカロリーを追加
   const registFood = async (form) => {
@@ -94,6 +119,7 @@ export function Mypage() {
       alert("削除できません");
     }
   }
+
 
   return (
     <>
@@ -158,6 +184,7 @@ export function Mypage() {
 
       <div className="container">
         <p className="title">今日食べたもの一覧</p>
+        <p>今日の総摂取カロリー: {totalCalorie}kcal</p>
         <ul>
           {foodList.map(food => (
             <li key={food.id}>
@@ -166,6 +193,11 @@ export function Mypage() {
             </li>
           ))}
         </ul>
+      </div>
+
+      <div className="container">
+        <p className="title">過去の日付の食べたもの一覧を検索</p>
+        <button type="button" onClick={() => navigate("/past-list")}>検索ページへ</button>
       </div>
     </>
   )

@@ -35,7 +35,7 @@ public class MypageServiceImpl implements MypageService {
 	@Transactional
 	public UserProfileResponse findProfileById(Long userId) {
 
-		UserProfile userProfile = mypageRepository.getProfile(userId);
+		UserProfile userProfile = mypageRepository.selectProfile(userId);
 
 		UserProfileResponse result = new UserProfileResponse();
 		result.setUserId(userProfile.getUserId());
@@ -53,13 +53,21 @@ public class MypageServiceImpl implements MypageService {
 	//foodList一覧取得
 	@Override
 	@Transactional(readOnly = true)
-	public List<FoodListResponse> findAll(Long userId, LocalDate today) {
+	public List<FoodListResponse> findByUserIdAndDate(Long userId, LocalDate today) {
 
-		List<FoodList> foodList = mypageRepository.selectAll(userId, today);
+		List<FoodList> foodList = mypageRepository.selectByUserIdAndDate(userId, today);
 
 		List<FoodListResponse> result = responseCreator.createFoodListResponseList(foodList);
 
 		return result;
+	}
+
+	//1日の総摂取カロリー取得
+	@Override
+	@Transactional(readOnly = true)
+	public int getTotalCalorie(Long userId, LocalDate date) {
+
+		return mypageRepository.sumTotalCalorie(userId, date);
 	}
 
 	//foodListから削除
@@ -69,8 +77,5 @@ public class MypageServiceImpl implements MypageService {
 
 		mypageRepository.deleteFood(id);
 	}
-
-
-
 
 }

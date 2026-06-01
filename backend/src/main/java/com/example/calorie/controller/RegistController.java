@@ -33,6 +33,7 @@ public class RegistController {
 	@PostMapping("/regist")
 	public ResponseEntity<?> registUser(@Validated @RequestBody UserRequest req) {
 
+		//Entity生成
 		User user = new User();
 		user.setUsername(req.getUsername());
 		user.setPassword(req.getPassword());

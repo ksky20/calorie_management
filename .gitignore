@@ -64,3 +64,4 @@ logs/
 # 環境変数ファイル
 .env
 >>>>>>> 0bae5371f6064231da4ad0f4ef586f3eb3abaf86
+/.metadata/

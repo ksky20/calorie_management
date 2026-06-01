@@ -33,7 +33,7 @@ public class MypageRepositoryImpl implements MypageRepository {
 
 	//userProfile一覧取得
 	@Override
-	public UserProfile getProfile(Long userId) {
+	public UserProfile selectProfile(Long userId) {
 
 		String sql = "SELECT * " +
 						 "FROM user_profile WHERE user_id = ?";
@@ -58,13 +58,13 @@ public class MypageRepositoryImpl implements MypageRepository {
 
 	//foodList一覧取得
 	@Override
-	public List<FoodList> selectAll(Long userId, LocalDate today) {
+	public List<FoodList> selectByUserIdAndDate(Long userId, LocalDate date) {
 
 		String sql = "SELECT * " +
 						 "FROM food_list WHERE user_id = ? AND food_date = ?";
 
 		// jdbcTemplate.queryForList() を利用して、Map型のListを取得
-		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, userId, today);
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, userId, date);
 
 		// List<FoodList> ← List<<FoodList<>>
 		List<FoodList> list = new ArrayList<>();
@@ -91,6 +91,17 @@ public class MypageRepositoryImpl implements MypageRepository {
 		return foodList;
 	}
 
+	//1日の総摂取カロリー取得
+	@Override
+	public int sumTotalCalorie(Long userId, LocalDate date) {
+
+		String sql = "SELECT SUM(food_calorie) " +
+							"FROM food_list WHERE user_id = ? AND food_date = ?";
+
+		Integer result = jdbcTemplate.queryForObject(sql, Integer.class, userId, date);
+		return result != null ? result : 0;
+	}
+
 	//foodListから削除
 	@Override
 	public void deleteFood(Long id) {
@@ -99,9 +110,5 @@ public class MypageRepositoryImpl implements MypageRepository {
 
 		jdbcTemplate.update(sql, id);
 	}
-
-
-
-
 
 }

@@ -15,18 +15,19 @@ import lombok.RequiredArgsConstructor;
 public class FoodServiceImpl implements FoodService {
 
 	private final FoodRepository repository;
-	
+
 //	今日食べたもの一覧表示
 	@Override
 	public List<Map<String, Object>> selectByUser_idAndDate(int user_id, LocalDate date) {
-		
+
 		return repository.selectByUser_idAndDate(user_id, date);
 	}
 
+	//総摂取カロリー取得
 	@Override
 	public int getTotalCalories(int user_id, LocalDate date) {
-		
-		return repository.getTotalCalories(user_id, date);
+
+		return repository.sumTotalCalories(user_id, date);
 	}
 
 }
