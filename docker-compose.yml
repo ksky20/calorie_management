@@ -30,7 +30,7 @@ services:
       test: ["CMD-SHELL", "curl -f http://localhost:8080/ || exit 1"]      
       interval: 15s
       retries: 5
-      start_period: 30s  # Spring起動を待つ猶予時間
+      start_period: 30s  
 
   frontend:
     build: ./frontend
@@ -38,4 +38,4 @@ services:
       - "5173:80"
     depends_on:
       backend:
-        condition: service_healthy  # ← ここを変更
+        condition: service_healthy  
