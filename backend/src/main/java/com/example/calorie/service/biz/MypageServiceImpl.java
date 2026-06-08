@@ -63,12 +63,12 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	//1日の総摂取カロリー取得
-	@Override
-	@Transactional(readOnly = true)
-	public int getTotalCalorie(Long userId, LocalDate date) {
-
-		return mypageRepository.sumTotalCalorie(userId, date);
-	}
+//	@Override
+//	@Transactional(readOnly = true)
+//	public int getTotalCalorie(Long userId, LocalDate date) {
+//
+//		return mypageRepository.sumTotalCalorie(userId, date);
+//	}
 
 	//foodListから削除
 	@Override

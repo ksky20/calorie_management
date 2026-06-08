@@ -14,7 +14,7 @@ export function Mypage() {
     activity: "",
     idealCalories: "",
   });
-  const [totalCalorie, setTotalCalorie] = useState("");
+  // const [totalCalorie, setTotalCalorie] = useState("");
   const [userInfo, setUserInfo] = useState({
     id: "",
     username: "",
@@ -36,8 +36,8 @@ export function Mypage() {
     const fetchUser = async () => {
       const res = await api("/user-info", "GET");
       const data = await res.json();
-      console.log("userInfo:" + data.id);
-      console.log(JSON.stringify(data));
+      // console.log("userInfo:" + data.id);
+      // console.log(JSON.stringify(data));
       setUserInfo(data);
     }
 
@@ -58,20 +58,21 @@ export function Mypage() {
       setUserProfile(data);
     };
 
+    // console.log("userInfo.id:", userInfo.id);
     //totalCalorie表示
-    const fetchTotalCalorie = async () => {
-      const res = await api(`/show-total-calorie/${userInfo.id}`, "GET");
-      const data = await res.json();
-      console.log("totalcalorie:" + data);
-      setTotalCalorie(data);
-    }
+    // const fetchTotalCalorie = async () => {
+    //   const res = await api(`/show-total-calorie/${userInfo.id}`, "GET");
+    //   const data = await res.json();
+    //   console.log("totalcalorie:" + data);
+    //   setTotalCalorie(data);
+    // }
 
     fetchUser();
     fetchFoodList();
     fetchProfile(); 
-    if (!userInfo.id) return;
-    fetchTotalCalorie();
-  },[userInfo.id]);
+    // if (!userInfo.id) return;
+    // fetchTotalCalorie();
+  },[userInfo]);
 
   //食べたものとカロリーを追加
   const registFood = async (form) => {
@@ -106,6 +107,9 @@ export function Mypage() {
     4: "激しい運動(週6〜7回)",
     5: "非常に激しい運動(日常的に体を動かす職業)",
   };  
+
+  //総カロリー計算
+  const totalCalorie = foodList.reduce((sum, food) => sum + food.foodCalorie, 0);
 
   //foodListから削除
   const deleteFood = async (id) => {
@@ -148,7 +152,7 @@ export function Mypage() {
                 }
               })}
             />
-            <div className="foodName">{errors.foodName?.message}</div>
+            <div className="error">{errors.foodName?.message}</div>
           </div>
           <div>
             <label htmlFor="foodCalorie">摂取カロリー</label> 
@@ -194,6 +198,7 @@ export function Mypage() {
           ))}
         </ul>
       </div>
+      <br />
 
       <div className="container">
         <p className="title">過去の日付の食べたもの一覧を検索</p>

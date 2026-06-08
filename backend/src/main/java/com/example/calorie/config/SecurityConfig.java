@@ -23,11 +23,14 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http
-			.csrf(csrf -> csrf.disable())
+			.csrf(csrf -> csrf
+		        .ignoringRequestMatchers("/login", "/regist")
+			)
 			.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 			.authorizeHttpRequests(auth -> auth
 					.requestMatchers("/login").permitAll()
 					.requestMatchers("/regist").permitAll()
+					.requestMatchers("/csrf-token").permitAll()
 					.anyRequest().authenticated()
 			)
 			.formLogin(form -> form
@@ -55,11 +58,12 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
+	//CORS設定
 	@Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of("http://localhost:5173"));
-        config.setAllowedMethods(List.of("GET","POST","PUT","DELETE"));
+        config.setAllowedMethods(List.of("GET","POST","PUT","DELETE", "OPTIONS"));
         config.setAllowCredentials(true);
         config.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

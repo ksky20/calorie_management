@@ -18,7 +18,7 @@ public interface MypageService {
 	List<FoodListResponse> findByUserIdAndDate(Long userId, LocalDate today);
 
 	//1日の総摂取カロリー取得
-	int getTotalCalorie(Long userId, LocalDate date);
+//	int getTotalCalorie(Long userId, LocalDate date);
 
 	//foodListから削除
 	void deleteFood(Long id);

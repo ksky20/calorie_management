@@ -66,15 +66,16 @@ public class MypageController {
 		return ResponseEntity.ok(body);
 	}
 
+	//Reactで計算する
 	//1日(今日)の総摂取カロリー取得
-	@GetMapping("/show-total-calorie/{userId}")
-	public ResponseEntity<?> getTotalCalorie(@PathVariable Long userId) {
-
-		LocalDate today = LocalDate.now();
-		int totalCalories = mypageService.getTotalCalorie(userId, today);
-
-		return ResponseEntity.ok(totalCalories);
-	}
+//	@GetMapping("/show-total-calorie/{userId}")
+//	public ResponseEntity<?> getTotalCalorie(@PathVariable Long userId) {
+//
+//		LocalDate today = LocalDate.now();
+//		int totalCalories = mypageService.getTotalCalorie(userId, today);
+//
+//		return ResponseEntity.ok(totalCalories);
+//	}
 
 	//foodListから削除
 	@DeleteMapping("/delete-food/{id}")

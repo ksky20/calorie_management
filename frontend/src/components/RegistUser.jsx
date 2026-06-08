@@ -23,39 +23,42 @@ export function RegistUser () {
 
   return (
     <>
-      <h2>登録画面</h2>
-      <form onSubmit={handleSubmit(registUser)} >
-        <label htmlFor="username">ユーザ名: </label>
-        <input type="text" name="username" id="username" 
-          {...register("username", {
-            required: "入力してください",
-            minLength: {
-                value: 4,
-                message: "4文字以上で入力してください"
-            },
-            maxLength: {
-                value: 20,
-                message: "20文字以下で入力してください"
-            }
-          })} />
-        <div className="error">{errors.username?.message}</div>
-        <br />
-        <label htmlFor="password">パスワード: </label>
-        <input type="password" name="password" id="password" 
-          {...register("password", {
-            required: "入力してください",
-            minLength: {
-                value: 4,
-                message: "4文字以上で入力してください"
-            },
-            maxLength: {
-                value: 20,
-                message: "20文字以下で入力してください"
-            }
-          })}/>
-        <div className="error">{errors.password?.message}</div>
-        <button type="submit">登録</button>
-      </form>
+      <div className="container">
+        <h2>登録画面</h2>
+        <form onSubmit={handleSubmit(registUser)} >
+          <label htmlFor="username">ユーザ名: </label>
+          <input type="text" name="username" id="username" 
+            {...register("username", {
+              required: "入力してください",
+              minLength: {
+                  value: 4,
+                  message: "4文字以上で入力してください"
+              },
+              maxLength: {
+                  value: 20,
+                  message: "20文字以下で入力してください"
+              }
+            })} />
+          <div className="error">{errors.username?.message}</div>
+          <br />
+          <label htmlFor="password">パスワード: </label>
+          <input type="password" name="password" id="password" 
+            {...register("password", {
+              required: "入力してください",
+              minLength: {
+                  value: 4,
+                  message: "4文字以上で入力してください"
+              },
+              maxLength: {
+                  value: 20,
+                  message: "20文字以下で入力してください"
+              }
+            })}/>
+          <div className="error">{errors.password?.message}</div>
+          <button type="submit">登録</button><br />
+          <button onClick={() => navigate("/login")}>戻る</button>
+        </form>
+      </div>
     </>
   )
 }

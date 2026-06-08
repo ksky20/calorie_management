@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { api } from "../api/api";
 import { useForm } from "react-hook-form";
+import { csrfToken } from "../api/api";
+import { setCsrfToken } from "../api/api";
 
 
 export function Login() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  
+  const { register, handleSubmit, formState: { errors } } = useForm();  
   const navigate = useNavigate();
 
   //ログイン
@@ -17,10 +18,19 @@ export function Login() {
     const res = await fetch("http://localhost:8080/login", {
       method: "POST",
       credentials:"include",
+      headers: {
+        "X-CSRF-TOKEN": csrfToken  
+      },
       body: formData,
     });
 
     if(res.ok) {
+      // ログイン成功後にトークンを再取得
+      const csrfRes = await fetch("http://localhost:8080/csrf-token", {
+        credentials: "include"
+      });
+      const data = await csrfRes.json();
+      setCsrfToken(data.token); // 新しいトークンをセット
       const profileRes = await api("/profile-check");
       const isProfile = await profileRes.json();
 

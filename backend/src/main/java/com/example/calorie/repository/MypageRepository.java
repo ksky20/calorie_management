@@ -19,7 +19,7 @@ public interface MypageRepository {
 	List<FoodList> selectByUserIdAndDate(Long userId, LocalDate today);
 
 	//1日の総摂取カロリー
-	int sumTotalCalorie(Long userId, LocalDate date);
+//	int sumTotalCalorie(Long userId, LocalDate date);
 
 	//foodListから削除
 	void deleteFood(Long id);

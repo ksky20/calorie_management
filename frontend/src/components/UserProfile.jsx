@@ -35,98 +35,100 @@ export function UserProfile() {
 
   return (
     <>
-      <h2>プロフィール情報入力</h2>
+      <div className='container'>
+        <h2 className='title'>プロフィール情報入力</h2>
 
-      <form onSubmit={handleSubmit(registProfile)}>
-        <div>
-          <label htmlFor="age">年齢</label><br />
-          <input type="number" id='age' name='age' 
-            {...register("age", {
-              required: "入力してください",
-              minLength: {
-                value: 0,
-                message: "年齢を入力してください"
-              },
-              maxLength: {
-                value: 150,
-                message: "年齢を入力してください"
-              }
-            })}
-          />
-          <div className='error'>{errors.age?.message}</div>
-        </div>
-        <div>
-          <label>性別</label><br />
-          <label htmlFor="gender">男性</label>
-          <input type="radio" id='male' name='gender' value="male" 
-            {...register("gender", {
-              required: "選択してください"
-            })}
-          />
-          <label htmlFor="gender">女性</label>
-          <input type="radio" id='female' name='gender' value="female" 
-            {...register("gender", {
-              required: "選択してください"
-            })}
-          /> 
-          <div className='error'>{errors.gender?.message}</div>         
-        </div>
-        <div>
-          <label htmlFor="height">身長</label><br />
-          <input type="number" id='height' name='height'
-            {...register("height", {
-              required: "入力してください",
-              min: {
-                value: 0,
-                message: "0以上で入力してください"
-              },
-              max: {
-                  value: 300,
-                  message: "300以下で入力してください"
-              },
-              valueAsNumber: true
-            })}
-          />
-          <div className='error'>{errors.height?.message}</div>
-        </div>
-        <div>
-          <label htmlFor="weight">体重</label><br />
-          <input type="number" id='weight' name='weight' 
-            {...register("weight", {
-              required: "入力してください",
-              min: {
-                value: 0,
-                message: "0以上で入力してください"
-              },
-              max: {
-                  value: 300,
-                  message: "300以下で入力してください"
-              },
-              valueAsNumber: true
-            })}
-          />
-          <div className='error'>{errors.weight?.message}</div>
-        </div>
-        <div>
-          <label htmlFor="activity">日常の活動量</label><br />
-          <select name="activity" id="activity" 
-            {...register("activity", {
-              required: "選択してください",
-              valueAsNumber: true
-            })}>
-            <option value="1">ほとんど運動しない</option>
-            <option value="2">軽い運動(週1~2日)</option>
-            <option value="3">中程度の運動(週3~5日)</option>
-            <option value="4">激しい運動(週6,7日)</option>
-            <option value="5">非常に激しい運動(日常的に体を動かす職業)</option>
-          </select>
-          <div className='error'>{errors.activity?.message}</div>
-        </div>
+        <form onSubmit={handleSubmit(registProfile)}>
+          <div>
+            <label htmlFor="age">年齢</label><br />
+            <input type="number" id='age' name='age' 
+              {...register("age", {
+                required: "入力してください",
+                minLength: {
+                  value: 0,
+                  message: "年齢を入力してください"
+                },
+                maxLength: {
+                  value: 150,
+                  message: "年齢を入力してください"
+                }
+              })}
+            />
+            <div className='error'>{errors.age?.message}</div>
+          </div>
+          <div>
+            <label>性別</label><br />
+            <label htmlFor="gender">男性</label>
+            <input type="radio" id='male' name='gender' value="male" 
+              {...register("gender", {
+                required: "選択してください"
+              })}
+            />
+            <label htmlFor="gender">女性</label>
+            <input type="radio" id='female' name='gender' value="female" 
+              {...register("gender", {
+                required: "選択してください"
+              })}
+            /> 
+            <div className='error'>{errors.gender?.message}</div>         
+          </div>
+          <div>
+            <label htmlFor="height">身長</label><br />
+            <input type="number" id='height' name='height'
+              {...register("height", {
+                required: "入力してください",
+                min: {
+                  value: 0,
+                  message: "0以上で入力してください"
+                },
+                max: {
+                    value: 300,
+                    message: "300以下で入力してください"
+                },
+                valueAsNumber: true
+              })}
+            />
+            <div className='error'>{errors.height?.message}</div>
+          </div>
+          <div>
+            <label htmlFor="weight">体重</label><br />
+            <input type="number" id='weight' name='weight' 
+              {...register("weight", {
+                required: "入力してください",
+                min: {
+                  value: 0,
+                  message: "0以上で入力してください"
+                },
+                max: {
+                    value: 300,
+                    message: "300以下で入力してください"
+                },
+                valueAsNumber: true
+              })}
+            />
+            <div className='error'>{errors.weight?.message}</div>
+          </div>
+          <div>
+            <label htmlFor="activity">日常の活動量</label><br />
+            <select name="activity" id="activity" 
+              {...register("activity", {
+                required: "選択してください",
+                valueAsNumber: true
+              })}>
+              <option value="1">ほとんど運動しない</option>
+              <option value="2">軽い運動(週1~2日)</option>
+              <option value="3">中程度の運動(週3~5日)</option>
+              <option value="4">激しい運動(週6,7日)</option>
+              <option value="5">非常に激しい運動(日常的に体を動かす職業)</option>
+            </select>
+            <div className='error'>{errors.activity?.message}</div>
+          </div>
 
-        <div>
-          <button type='submit'>登録</button>
-        </div>
-      </form>
+          <div>
+            <button type='submit'>登録</button>
+          </div>
+        </form>
+      </div>
     </>
   )
 }

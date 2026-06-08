@@ -26,7 +26,7 @@ export function PastFoodList() {
     const res = await api(`/delete-food/${id}`, "DELETE");
 
     if(res.ok) {
-      const resList = await api("/show-food-list", "GET");
+      const resList = await api(`/show-past-list?date=${searchedDate}`, "GET");
       const data = await resList.json();
       setFoodList(data);
     } else {

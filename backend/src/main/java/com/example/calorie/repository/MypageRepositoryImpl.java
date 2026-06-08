@@ -92,15 +92,15 @@ public class MypageRepositoryImpl implements MypageRepository {
 	}
 
 	//1日の総摂取カロリー取得
-	@Override
-	public int sumTotalCalorie(Long userId, LocalDate date) {
-
-		String sql = "SELECT SUM(food_calorie) " +
-							"FROM food_list WHERE user_id = ? AND food_date = ?";
-
-		Integer result = jdbcTemplate.queryForObject(sql, Integer.class, userId, date);
-		return result != null ? result : 0;
-	}
+//	@Override
+//	public int sumTotalCalorie(Long userId, LocalDate date) {
+//
+//		String sql = "SELECT SUM(food_calorie) " +
+//							"FROM food_list WHERE user_id = ? AND food_date = ?";
+//
+//		Integer result = jdbcTemplate.queryForObject(sql, Integer.class, userId, date);
+//		return result != null ? result : 0;
+//	}
 
 	//foodListから削除
 	@Override
