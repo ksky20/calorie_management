@@ -1,12 +1,11 @@
 package com.example.calorie.controller;
 
 import java.net.URI;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,14 +15,12 @@ import com.example.calorie.dto.request.FoodListRequest;
 import com.example.calorie.dto.request.UserProfileRequest;
 import com.example.calorie.dto.request.UserRequest;
 import com.example.calorie.dto.response.FoodListResponse;
-import com.example.calorie.dto.response.UserProfileResponse;
 import com.example.calorie.entity.FoodList;
 import com.example.calorie.entity.User;
 import com.example.calorie.entity.UserProfile;
 import com.example.calorie.security.UserDetailsImpl;
 import com.example.calorie.service.biz.RegistService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -48,7 +45,7 @@ public class RegistController {
 
 	//プロフィール登録
 	@PostMapping("/regist-profile")
-	public ResponseEntity<UserProfileResponse> registProfile(
+	public ResponseEntity<?> registProfile(
 			@Validated @RequestBody UserProfileRequest req,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
@@ -61,21 +58,20 @@ public class RegistController {
 		userProfile.setActivity(req.getActivity());
 		userProfile.setUserId(userDetails.getId());
 
-		UserProfileResponse created = registService.registProfile(userProfile);
+		boolean result = registService.registProfile(userProfile);
 
 		//ResponseのLocation設定のためのURI作成
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-																	.path("{id}")
-																	.buildAndExpand(created.getId())
-																	.toUri();
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+//																	.path("{id}")
+//																	.buildAndExpand(created.getId())
+//																	.toUri();
 
-		return ResponseEntity.created(location)
-									   .body(created);
+		return ResponseEntity.ok(Map.of("message", "success"));
 	}
 
 	//食べたもの登録
 	@PostMapping("/add-food")
-	public ResponseEntity<FoodListResponse> insertFood(
+	public ResponseEntity<?> insertFood(
 			@Validated @RequestBody FoodListRequest req,
 			@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
@@ -86,15 +82,14 @@ public class RegistController {
 		foodList.setFoodCalorie(req.getFoodCalorie());
 		foodList.setUserId(userDetails.getId());
 
-		FoodListResponse created = registService.insertFood(foodList);
+		boolean result = registService.insertFood(foodList);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-																	.path("{id}")
-																	.buildAndExpand(created.getId())
-																	.toUri();
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+//																	.path("{id}")
+//																	.buildAndExpand(created.getId())
+//																	.toUri();
 
-		return ResponseEntity.created(location)
-										.body(created);
+		return ResponseEntity.ok(Map.of("message", "success"));
 	}
 
 

@@ -11,10 +11,10 @@ export const api = async (url, method = "GET", body = null) => {
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      "X-CSRF-TOKEN": csrfToken  // ← headersの中に移動
+      "X-CSRF-TOKEN": csrfToken  
     },
   };
-  console.log("csrfToken:", csrfToken); //確認
+  //console.log("csrfToken:", csrfToken); //確認
   if (body) options.body = JSON.stringify(body);
   return fetch(`http://localhost:8080${url}`, options);
 };

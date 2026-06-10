@@ -10,8 +10,8 @@ public interface RegistRepository {
 	void insertUser(User user);
 
 	//UserProfileを登録
-	UserProfile registUser(UserProfile userProfile);
+	boolean registUser(UserProfile userProfile);
 
 	//FoodListを登録
-	FoodList insertFood(FoodList foodList);
+	boolean insertFood(FoodList foodList);
 }

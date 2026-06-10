@@ -36,30 +36,30 @@ public class RegistServiceImpl implements RegistService {
 
 	//プロフィール情報を登録
 	@Override
-	public UserProfileResponse registProfile(UserProfile userProfile) {
+	public boolean registProfile(UserProfile userProfile) {
 
 		int idealCalories = calcService.calcIdealCalories(userProfile);
 
 		userProfile.setIdealCalories(idealCalories);
 
 		//インフラ層に渡す
-		UserProfile created = registRepository.registUser(userProfile);
+		boolean result = registRepository.registUser(userProfile);
 
 		//Entity → Responseに変換
-		UserProfileResponse result = responseCreator.createUserProfileResponse(created);
+//		UserProfileResponse result = responseCreator.createUserProfileResponse(created);
 
 		return result;
 	}
 
 //	食べたものを追加
 	@Override
-	public FoodListResponse insertFood(FoodList foodList) {
+	public boolean insertFood(FoodList foodList) {
 
 		//インフラ層に
-		FoodList created = registRepository.insertFood(foodList);
+		boolean result = registRepository.insertFood(foodList);
 
 		//Entity → Response
-		FoodListResponse result = responseCreator.createFoodListResponse(created);
+//		FoodListResponse result = responseCreator.createFoodListResponse(created);
 
 		return result;
 	}

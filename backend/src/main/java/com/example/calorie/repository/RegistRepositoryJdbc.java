@@ -32,49 +32,71 @@ public class RegistRepositoryJdbc implements RegistRepository {
 
 	//UserProfileをDBに登録
 	@Override
-	public UserProfile registUser(UserProfile userProfile) {
+	public boolean registUser(UserProfile userProfile) {
 
 		//自動採番したIDを取得する
-		PreparedStatementCreator psc = new UserProfileStatementCreator(userProfile);
-		KeyHolder kh = new GeneratedKeyHolder();
+		//必要ないのでは？
+//		PreparedStatementCreator psc = new UserProfileStatementCreator(userProfile);
+//		KeyHolder kh = new GeneratedKeyHolder();
+//
+//		jdbcTemplate.update(psc, kh);
+//
+//		Long newId = kh.getKey().longValue();
 
-		jdbcTemplate.update(psc, kh);
+//		UserProfile created = new UserProfile(newId,
+//																userProfile.getUserId(),
+//																userProfile.getAge(),
+//																userProfile.getGender(),
+//																userProfile.getHeight(),
+//																userProfile.getWeight(),
+//																userProfile.getActivity(),
+//																userProfile.getIdealCalories()
+//															   );
 
-		Long newId = kh.getKey().longValue();
+		String sql = "INSERT INTO user_profile (user_id, age, gender, height, weight, activity, ideal_calories) " +
+	 						" VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-		UserProfile created = new UserProfile(newId,
-																userProfile.getUserId(),
-																userProfile.getAge(),
-																userProfile.getGender(),
-																userProfile.getHeight(),
-																userProfile.getWeight(),
-																userProfile.getActivity(),
-																userProfile.getIdealCalories()
-															   );
+		int rows = jdbcTemplate.update(sql,
+											userProfile.getUserId(),
+											userProfile.getAge(),
+											userProfile.getGender(),
+											userProfile.getHeight(),
+											userProfile.getWeight(),
+											userProfile.getActivity(),
+											userProfile.getIdealCalories());
 
-		return created;
+		return rows > 0;
 	}
 
 	//FoodListに追加
 	@Override
-	public FoodList insertFood(FoodList foodList) {
+	public boolean insertFood(FoodList foodList) {
 
 		//自動採番したIDを取得する
-		PreparedStatementCreator psc = new FoodListStatementCreator(foodList);
-		KeyHolder kh = new GeneratedKeyHolder();
+//		PreparedStatementCreator psc = new FoodListStatementCreator(foodList);
+//		KeyHolder kh = new GeneratedKeyHolder();
+//
+//		jdbcTemplate.update(psc, kh);
+//
+//		Long newId = kh.getKey().longValue();
 
-		jdbcTemplate.update(psc, kh);
+//		FoodList created = new FoodList(newId,
+//														foodList.getUserId(),
+//														foodList.getFoodDate(),
+//														foodList.getFoodName(),
+//														foodList.getFoodCalorie()
+//													  );
 
-		Long newId = kh.getKey().longValue();
+		String sql = "INSERT INTO food_list (user_id, food_date, food_name, food_calorie) " +
+							" VALUES (?, ?, ?, ?)";
 
-		FoodList created = new FoodList(newId,
-														foodList.getUserId(),
-														foodList.getFoodDate(),
-														foodList.getFoodName(),
-														foodList.getFoodCalorie()
-													  );
+		int rows = jdbcTemplate.update(sql,
+											foodList.getUserId(),
+											foodList.getFoodDate(),
+											foodList.getFoodName(),
+											foodList.getFoodCalorie());
 
-		return created;
+		return rows > 0;
 	}
 
 

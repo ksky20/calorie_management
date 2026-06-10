@@ -31,6 +31,7 @@ export function Login() {
       });
       const data = await csrfRes.json();
       setCsrfToken(data.token); // 新しいトークンをセット
+      //UserProfileの有無確認
       const profileRes = await api("/profile-check");
       const isProfile = await profileRes.json();
 

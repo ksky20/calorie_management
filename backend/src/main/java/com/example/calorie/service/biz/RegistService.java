@@ -12,8 +12,8 @@ public interface RegistService {
 	void registUser(User user);
 
 	//UserProfileをインフラ層に
-	UserProfileResponse registProfile(UserProfile userProfile);
+	boolean registProfile(UserProfile userProfile);
 
 	//FoodListをインフラ層に
-	FoodListResponse insertFood(FoodList foodList);
+	boolean insertFood(FoodList foodList);
 }
