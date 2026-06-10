@@ -10,9 +10,11 @@
   - Java 21
   - Spring Boot 4.0.5
   - Spring Security
-  - React ← (Tymeleaf)
+  - React ← (Thymeleaf)
   - CSS
-  - MySQL 
+  - MySQL
+  - Docker
+  - Nginx
 
 # 機能一覧
 　- ユーザー登録、ログイン
@@ -27,6 +29,12 @@
 次に、現在はSPAが主流ということを知り、フロントエンドにReact、バックエンドにSpringという構成にしようと考えました。(Reactを選択した理由は、JSを少し学び、Udemyで講座が安くなっていたため)それぞれ機能を実装したが、React-Spring間でデータをやり取りする方法が分からず、Reactのapi.jsとSpringのSecurityConfigクラスは、生成AIを利用しました。
 
 今後の展望として、機能面ではタンパク質や脂質、そして炭水化物など項目ごとにも記録をつけていきたい。また、DockerやAWS等の勉強もして構築してデプロイまでもっていきたい。そして、UIの面がまだ未熟なのでより自然なUIにできるように。
+
+変遷
+~6/8
+docker composeでコンテナ起動
+~6/10
+POSTメソッドに対応するとき、PSCを使って自動採番を取得しなければいけないと勘違いしていたため、Repositoryクラスに直接SQL文を書くように
 
 
 参考文献: 
