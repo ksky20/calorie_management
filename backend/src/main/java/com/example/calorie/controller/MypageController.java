@@ -79,9 +79,10 @@ public class MypageController {
 
 	//foodListから削除
 	@DeleteMapping("/delete-food/{id}")
-	public ResponseEntity<?> deleteFood(@PathVariable Long id) {
+	public ResponseEntity<?> deleteFood(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
 
-		mypageService.deleteFood(id);
+		Long userId = userDetails.getId();
+		mypageService.deleteFood(userId, id);
 
 		return ResponseEntity.ok().build();
 	}

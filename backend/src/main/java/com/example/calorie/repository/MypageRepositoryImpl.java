@@ -91,6 +91,7 @@ public class MypageRepositoryImpl implements MypageRepository {
 		return foodList;
 	}
 
+	//Reactで計算するため削除
 	//1日の総摂取カロリー取得
 //	@Override
 //	public int sumTotalCalorie(Long userId, LocalDate date) {
@@ -104,11 +105,11 @@ public class MypageRepositoryImpl implements MypageRepository {
 
 	//foodListから削除
 	@Override
-	public void deleteFood(Long id) {
+	public void deleteFood(Long userId, Long id) {
 
-		String sql = "DELETE FROM food_list WHERE id = ?";
+		String sql = "DELETE FROM food_list WHERE user_id = ? AND id = ?";
 
-		jdbcTemplate.update(sql, id);
+		jdbcTemplate.update(sql, userId, id);
 	}
 
 }

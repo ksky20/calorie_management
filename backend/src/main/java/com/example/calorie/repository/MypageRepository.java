@@ -22,6 +22,6 @@ public interface MypageRepository {
 //	int sumTotalCalorie(Long userId, LocalDate date);
 
 	//foodListから削除
-	void deleteFood(Long id);
+	void deleteFood(Long userId, Long id);
 
 }

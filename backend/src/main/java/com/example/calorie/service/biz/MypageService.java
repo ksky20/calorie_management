@@ -21,7 +21,7 @@ public interface MypageService {
 //	int getTotalCalorie(Long userId, LocalDate date);
 
 	//foodListから削除
-	void deleteFood(Long id);
+	void deleteFood(Long userId, Long id);
 
 	//日付検索
 //	List<FoodListResponse> getFoodListByDate(Long userId, LocalDate date);

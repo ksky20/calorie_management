@@ -62,6 +62,7 @@ public class MypageServiceImpl implements MypageService {
 		return result;
 	}
 
+	//Reactで計算するため削除
 	//1日の総摂取カロリー取得
 //	@Override
 //	@Transactional(readOnly = true)
@@ -73,9 +74,9 @@ public class MypageServiceImpl implements MypageService {
 	//foodListから削除
 	@Override
 	@Transactional
-	public void deleteFood(Long id) {
+	public void deleteFood(Long userId, Long id) {
 
-		mypageRepository.deleteFood(id);
+		mypageRepository.deleteFood(userId, id);
 	}
 
 }
