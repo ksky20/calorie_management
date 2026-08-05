@@ -1,41 +1,50 @@
 services:
-  mysql:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: calorie_management
-      MYSQL_USER: calorieuser
-      MYSQL_PASSWORD: cuser
-    ports:
-      - "3306:3306"
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      retries: 5
+
+  # AWSのときは削除
+  # mysql:
+  #   image: mysql:8
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: calorie_management
+  #     MYSQL_USER: calorieuser
+  #     MYSQL_PASSWORD: cuser
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  #   healthcheck:
+  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+  #     interval: 10s
+  #     retries: 5
 
   backend:
     build: ./backend
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/calorie_management
-      SPRING_DATASOURCE_USERNAME: calorieuser
-      SPRING_DATASOURCE_PASSWORD: cuser
-    depends_on:
-      mysql:
-        condition: service_healthy
+    # コンテナ開発用
+      # SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/calorie_management
+      # SPRING_DATASOURCE_USERNAME: calorieuser
+      # SPRING_DATASOURCE_PASSWORD: cuser
+
+    # AWS用
+      SPRING_DATASOURCE_URL: jdbc:mysql://portfolio-calorie.cuvakomakt6b.us-east-1.rds.amazonaws.com:3306/portfolio_cm
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: portfolioCM1
+    # depends_on:
+    #   mysql:
+    #     condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8080/ || exit 1"]      
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/ || exit 1"]  
       interval: 15s
       retries: 5
       start_period: 30s  
 
-  frontend:
-    build: ./frontend
-    ports:
-      - "5173:80"
-    depends_on:
-      backend:
-        condition: service_healthy  
+  # AWSのときは削除
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "5173:80"
+  #   depends_on:
+  #     backend:
+  #       condition: service_healthy  

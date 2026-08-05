@@ -15,7 +15,11 @@ export function Login() {
     formData.append("username", form.username);
     formData.append("password", form.password);
 
-    const res = await fetch("http://localhost:8080/login", {
+    //コンテナ用
+    //const res = await fetch("http://localhost:8080/login", {
+    
+    //AWS用
+    const res = await fetch("/api/login", {
       method: "POST",
       credentials:"include",
       headers: {
@@ -26,7 +30,11 @@ export function Login() {
 
     if(res.ok) {
       // ログイン成功後にトークンを再取得
-      const csrfRes = await fetch("http://localhost:8080/csrf-token", {
+      //コンテナ開発用
+      //const csrfRes = await fetch("http://localhost:8080/csrf-token", {
+      
+      // AWS用
+      const csrfRes = await fetch("/api/csrf-token", {
         credentials: "include"
       });
       const data = await csrfRes.json();

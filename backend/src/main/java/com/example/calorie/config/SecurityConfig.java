@@ -26,7 +26,7 @@ public class SecurityConfig {
 			.csrf(csrf -> csrf
 		        .ignoringRequestMatchers("/login", "/regist")
 			)
-			.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+			//.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 			.authorizeHttpRequests(auth -> auth
 					.requestMatchers("/login").permitAll()
 					.requestMatchers("/regist").permitAll()
@@ -59,16 +59,16 @@ public class SecurityConfig {
 	}
 
 	//CORS設定
-	@Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173"));
-        config.setAllowedMethods(List.of("GET","POST","PUT","DELETE", "OPTIONS"));
-        config.setAllowCredentials(true);
-        config.setAllowedHeaders(List.of("*"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-
-        return source;
-    }
+//	@Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowedOrigins(List.of("http://localhost:5173"));
+//        config.setAllowedMethods(List.of("GET","POST","PUT","DELETE", "OPTIONS"));
+//        config.setAllowCredentials(true);
+//        config.setAllowedHeaders(List.of("*"));
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//
+//        return source;
+//    }
 }
