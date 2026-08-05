@@ -15,6 +15,7 @@
   - MySQL
   - Docker
   - Nginx
+  - draw.io
 
 # 機能一覧
 　- ユーザー登録、ログイン
