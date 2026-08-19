@@ -14,10 +14,10 @@ export function App() {
   useEffect(() => {
     const fetchCsrfToken = async () => {
         // コンテナ開発用
-        //const res = await fetch("http://localhost:8080/csrf-token", {
+        const res = await fetch("http://localhost:8080/csrf-token", {
         
         // AWS用
-        const res = await fetch("/api/csrf-token", {
+        //const res = await fetch("/api/csrf-token", {
             credentials: "include"
         });
         const data = await res.json();

@@ -18,8 +18,8 @@ export const api = async (url, method = "GET", body = null) => {
   if (body) options.body = JSON.stringify(body);
 
   //コンテナ開発用
-  //return fetch(`http://localhost:8080${url}`, options);
+  return fetch(`http://localhost:8080${url}`, options);
 
   // AWS用
-  return fetch(`/api${url}`, options);
+  //return fetch(`/api${url}`, options);
 };

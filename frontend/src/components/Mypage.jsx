@@ -15,10 +15,10 @@ export function Mypage() {
     idealCalories: "",
   });
   // const [totalCalorie, setTotalCalorie] = useState("");
-  const [userInfo, setUserInfo] = useState({
-    id: "",
-    username: "",
-  });
+  // const [userInfo, setUserInfo] = useState({
+  //   id: "",
+  //   username: "",
+  // });
   const navigate = useNavigate();
 
   //ログアウト
@@ -33,13 +33,13 @@ export function Mypage() {
   useEffect (() => {
 
     //user情報取得
-    const fetchUser = async () => {
-      const res = await api("/user-info", "GET");
-      const data = await res.json();
-      // console.log("userInfo:" + data.id);
-      // console.log(JSON.stringify(data));
-      setUserInfo(data);
-    }
+    // const fetchUser = async () => {
+    //   const res = await api("/user-info", "GET");
+    //   const data = await res.json();
+    //   // console.log("userInfo:" + data.id);
+    //   // console.log(JSON.stringify(data));
+    //   setUserInfo(data);
+    // }
 
     //foodList表示
     const fetchFoodList = async () => {
@@ -67,12 +67,12 @@ export function Mypage() {
     //   setTotalCalorie(data);
     // }
 
-    fetchUser();
+    // fetchUser();
     fetchFoodList();
     fetchProfile(); 
     // if (!userInfo.id) return;
     // fetchTotalCalorie();
-  },[userInfo]);
+  },[]);
 
   //食べたものとカロリーを追加
   const registFood = async (form) => {
