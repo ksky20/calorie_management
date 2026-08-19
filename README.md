@@ -40,6 +40,8 @@
   deleteメソッドが、削除対象のidのみを指定して削除していた→他のユーザのも消しかねないと指摘をいただいたため、user_idと削除対象のidを指定して削除するように訂正
 - ~8/5
   AWSにデプロイして、動くことを確認。※HTTPSを学んでいないため、フロントとバンクエンドをつなげるようにどちらもEC2上のNginXに。
+- 8/20
+  mypageにて、無限ループが発生していたため修正(コンソールに表示されず、ネットワークタブを見て気づく)
 
 # AWS構成図
 <img width="667" height="457" alt="260805_aws_portfolio_cm_test drawio" src="https://github.com/user-attachments/assets/2f17c5ea-02ac-41c3-acfa-8a4ef69eaccc" />
