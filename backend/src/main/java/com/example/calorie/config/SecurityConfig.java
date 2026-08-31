@@ -26,7 +26,7 @@ public class SecurityConfig {
 			.csrf(csrf -> csrf
 		        .ignoringRequestMatchers("/login", "/regist")
 			)
-			//.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+//			.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 			.authorizeHttpRequests(auth -> auth
 					.requestMatchers("/login").permitAll()
 					.requestMatchers("/regist").permitAll()

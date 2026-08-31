@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class UserProfileRequest {
 	private Integer age;
 
 	@NotNull
+	@Pattern(regexp = "male|female")
 	private String gender;
 
 	@NotNull
@@ -33,5 +35,7 @@ public class UserProfileRequest {
 	private BigDecimal weight;
 
 	@NotNull
+	@Min(1)
+	@Max(5)
 	private Integer activity;
 }
