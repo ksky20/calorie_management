@@ -27,6 +27,7 @@ public class RegistServiceImpl implements RegistService {
 
 	//ユーザ登録
 	@Override
+	@Transactional
 	public void registUser(User user) {
 
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -36,6 +37,7 @@ public class RegistServiceImpl implements RegistService {
 
 	//プロフィール情報を登録
 	@Override
+	@Transactional
 	public boolean registProfile(UserProfile userProfile) {
 
 		int idealCalories = calcService.calcIdealCalories(userProfile);
@@ -53,6 +55,7 @@ public class RegistServiceImpl implements RegistService {
 
 //	食べたものを追加
 	@Override
+	@Transactional
 	public boolean insertFood(FoodList foodList) {
 
 		//インフラ層に

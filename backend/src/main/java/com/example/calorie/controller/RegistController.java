@@ -1,20 +1,18 @@
 package com.example.calorie.controller;
 
-import java.net.URI;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.calorie.dto.request.FoodListRequest;
 import com.example.calorie.dto.request.UserProfileRequest;
 import com.example.calorie.dto.request.UserRequest;
-import com.example.calorie.dto.response.FoodListResponse;
 import com.example.calorie.entity.FoodList;
 import com.example.calorie.entity.User;
 import com.example.calorie.entity.UserProfile;
@@ -40,7 +38,7 @@ public class RegistController {
 
 		registService.registUser(user);
 
-		return ResponseEntity.ok().build();
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	//プロフィール登録
@@ -66,7 +64,8 @@ public class RegistController {
 //																	.buildAndExpand(created.getId())
 //																	.toUri();
 
-		return ResponseEntity.ok(Map.of("message", "success"));
+		return ResponseEntity.status(HttpStatus.CREATED)
+										.body(Map.of("message", "success"));
 	}
 
 	//食べたもの登録
@@ -89,7 +88,8 @@ public class RegistController {
 //																	.buildAndExpand(created.getId())
 //																	.toUri();
 
-		return ResponseEntity.ok(Map.of("message", "success"));
+		return ResponseEntity.status(HttpStatus.CREATED)
+										.body(Map.of("message", "success"));
 	}
 
 
